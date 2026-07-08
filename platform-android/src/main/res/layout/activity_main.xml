@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Ekran statusu i konfiguracji (ADR-0038-Ekran-Statusu-i-Konfiguracji-Android.md).
+    Zwykłe Android Views, bez Jetpack Compose ani Material Components (zero nowych zależności) -
+    pierwszy i jedyny ekran aplikacji.
+-->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="24dp">
+
+        <TextView
+            android:id="@+id/serviceStatusText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/defaultSmsAppStatusText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/label_adapters_section"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/adaptersStatusText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/label_email_form_section"
+            android:textStyle="bold" />
+
+        <!--
+            Każde pole ma trwały opis nad sobą (nie tylko hint, który znika po rozpoczęciu
+            pisania) - zgłoszone jako brakujące przez nadzorcę projektu po pierwszej wersji tego
+            ekranu (ADR-0038): bez opisu nie było jasne, co konkretnie wpisać w poszczególne pola,
+            w szczególności które pole to docelowy adres e-mail odbioru przekazanych SMS-ów.
+
+            autofillHints/importantForAutofill jawnie ustawione na wszystkich polach - host/port
+            nie mają odpowiadającego standardowego podpowiedzenia autouzupełniania Androida
+            (importantForAutofill="no", świadoma decyzja, nie przeoczenie); login/hasło/adres
+            przekierowania mają naturalne odpowiedniki (emailAddress/password).
+        -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:textSize="13sp"
+            android:textColor="#666666"
+            android:text="@string/description_smtp_host_port" />
+
+        <EditText
+            android:id="@+id/smtpHostInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/hint_smtp_host"
+            android:inputType="textUri"
+            android:importantForAutofill="no" />
+
+        <EditText
+            android:id="@+id/smtpPortInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/hint_smtp_port"
+            android:inputType="number"
+            android:importantForAutofill="no" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:textSize="13sp"
+            android:textColor="#666666"
+            android:text="@string/description_imap_host_port" />
+
+        <EditText
+            android:id="@+id/imapHostInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/hint_imap_host"
+            android:inputType="textUri"
+            android:importantForAutofill="no" />
+
+        <EditText
+            android:id="@+id/imapPortInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/hint_imap_port"
+            android:inputType="number"
+            android:importantForAutofill="no" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:textSize="13sp"
+            android:textColor="#666666"
+            android:text="@string/description_username" />
+
+        <EditText
+            android:id="@+id/usernameInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/hint_username"
+            android:inputType="textEmailAddress"
+            android:autofillHints="emailAddress" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:textSize="13sp"
+            android:textColor="#666666"
+            android:text="@string/description_password" />
+
+        <EditText
+            android:id="@+id/passwordInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/hint_password"
+            android:inputType="textPassword"
+            android:autofillHints="password" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:textSize="13sp"
+            android:textColor="#666666"
+            android:text="@string/description_forward_to" />
+
+        <EditText
+            android:id="@+id/forwardToInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/hint_forward_to"
+            android:inputType="textEmailAddress"
+            android:autofillHints="emailAddress" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:textSize="13sp"
+            android:textColor="#666666"
+            android:text="@string/description_webhook_url" />
+
+        <EditText
+            android:id="@+id/webhookUrlInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/hint_webhook_url"
+            android:inputType="textUri"
+            android:importantForAutofill="no" />
+
+        <TextView
+            android:id="@+id/validationErrorText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#B00020"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/saveAndRestartButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/button_save_and_restart" />
+
+    </LinearLayout>
+</ScrollView>

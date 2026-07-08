@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Konfiguracja lint dla :platform-android (ADR-0038-Ekran-Statusu-i-Konfiguracji-Android.md).
+
+    `Typos`: sprawdzacz pisowni lint zna wyłącznie angielski - fałszywie zgłasza poprawne polskie
+    słowa (np. "adres") jako literówki angielskich odpowiedników ("address"). Wyłączone globalnie
+    dla tego modułu, nie punktowo per string - wszystkie zasoby tekstowe tej aplikacji są po
+    polsku, więc ten check nigdy nie da tu prawdziwie pozytywnego wyniku.
+-->
+<lint>
+    <issue id="Typos" severity="ignore" />
+</lint>

@@ -1,0 +1,196 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    color: #1a1a1a;
+    background: #f5f6f8;
+}
+
+.login-screen {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.login-form {
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
+    width: 320px;
+}
+
+.login-form h1 {
+    font-size: 1.25rem;
+    margin: 0 0 1.5rem;
+}
+
+.login-form label {
+    display: block;
+    margin-bottom: 0.25rem;
+    font-size: 0.875rem;
+}
+
+.login-form input {
+    width: 100%;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.login-form button {
+    width: 100%;
+    padding: 0.5rem;
+    background: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.error-message {
+    color: #dc2626;
+    font-size: 0.875rem;
+}
+
+.app-shell {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    grid-template-rows: auto 1fr;
+    grid-template-areas: "header header" "nav content";
+    min-height: 100vh;
+}
+
+.app-header {
+    grid-area: header;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 1.5rem;
+    background: #1e293b;
+    color: white;
+}
+
+.app-title {
+    font-weight: 600;
+}
+
+.logout-button {
+    background: transparent;
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 4px;
+    padding: 0.25rem 0.75rem;
+    cursor: pointer;
+}
+
+.app-nav {
+    grid-area: nav;
+    background: white;
+    border-right: 1px solid #e2e8f0;
+    padding: 1rem 0;
+}
+
+.app-nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.app-nav a {
+    display: block;
+    padding: 0.5rem 1.5rem;
+    color: #334155;
+    text-decoration: none;
+}
+
+.app-nav a:hover,
+.app-nav a.active {
+    background: #eef2ff;
+    color: #2563eb;
+}
+
+.app-content {
+    grid-area: content;
+    padding: 1.5rem;
+}
+
+.dashboard-section {
+    background: white;
+    border-radius: 6px;
+    padding: 1rem 1.25rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.dashboard-section h3 {
+    margin-top: 0;
+}
+
+.dashboard-section table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.dashboard-section th,
+.dashboard-section td {
+    text-align: left;
+    padding: 0.375rem 0.5rem;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.unavailable {
+    color: #64748b;
+    font-style: italic;
+}
+
+/*
+ * Widoki mobilne (71-Widoki-mobilne.md, Iteracja 6.28) - responsywny widok TEJ SAMEJ aplikacji
+ * (decyzja z Kontekstu planu Fazy 6: „nie istnieje odrębna ścieżka integracji dla urządzeń
+ * mobilnych" - §5). Poniżej 768px: układ jednokolumnowy (nawigacja nad treścią, nie obok),
+ * tabele przewijane poziomo (nie łamią layoutu na wąskim ekranie), pozycje `.mobile-hidden`
+ * (Routing/Konfiguracja - §4: „zaawansowana konfiguracja i edycja routingu... wyłącznie w pełnym
+ * interfejsie") ukryte WYŁĄCZNIE wizualnie - trasy/wywołania API pozostają nietknięte, więc
+ * bezpośredni dostęp przez hash (#/routing) nadal działa, jeśli ktoś go wpisze ręcznie.
+ */
+@media (max-width: 768px) {
+    .app-shell {
+        grid-template-columns: 1fr;
+        grid-template-areas: "header" "nav" "content";
+    }
+
+    .app-nav {
+        border-right: none;
+        border-bottom: 1px solid #e2e8f0;
+        padding: 0.5rem 0;
+    }
+
+    .app-nav ul {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .app-nav a {
+        padding: 0.5rem 0.75rem;
+    }
+
+    .mobile-hidden {
+        display: none;
+    }
+
+    .dashboard-section table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    .login-form {
+        width: 90vw;
+        max-width: 320px;
+    }
+}

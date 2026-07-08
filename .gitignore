@@ -1,0 +1,13 @@
+build/
+.gradle/
+.idea/
+*.iml
+local.properties
+
+# :platform-jvm - pliki wykonawcze (sekrety/konfiguracja), nigdy nie commitowane (ADR-0036)
+platform-jvm/secrets.properties
+platform-jvm/config.properties
+
+# Klucz podpisywania Android generowany lokalnie przez release.sh (KEYSTORE.md) - nigdy nie
+# commitowany; każdy build ma własny, unikalny klucz.
+keys/

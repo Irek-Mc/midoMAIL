@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>midoMAIL Gateway</title>
+    <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+
+<!-- Ekran logowania (SA-12, ADR-0033) - widoczny dopóki brak klucza API w sessionStorage -->
+<section id="login-screen" class="login-screen" hidden>
+    <form id="login-form" class="login-form">
+        <h1>midoMAIL Gateway</h1>
+        <label for="api-key">Klucz API</label>
+        <input type="password" id="api-key" name="api-key" autocomplete="off" required>
+        <button type="submit">Zaloguj</button>
+        <p id="login-error" class="error-message" hidden></p>
+    </form>
+</section>
+
+<!-- Powłoka aplikacji (60-UX-Filozofia.md §3 - 10 obszarów) -->
+<div id="app-shell" class="app-shell" hidden>
+    <header class="app-header">
+        <span class="app-title">midoMAIL Gateway</span>
+        <button id="logout-button" class="logout-button">Wyloguj</button>
+    </header>
+    <!--
+        71-Widoki-mobilne.md §2-4: klasa "mobile-hidden" oznacza pozycje niedostępne w widoku
+        mobilnym (media query w app.css, Iteracja 6.28) - WYŁĄCZNIE CSS, nie usunięcie z API/routera
+        (§5: „te same kontrakty API co interfejs administracyjny"). §4 wprost wymienia jedynie
+        „zaawansowaną konfigurację i edycję routingu" jako niedostępne na mobile.
+    -->
+    <nav class="app-nav">
+        <ul>
+            <li><a href="#/dashboard" data-area="dashboard">Dashboard</a></li>
+            <li><a href="#/messages" data-area="messages">Komunikaty</a></li>
+            <li class="mobile-hidden"><a href="#/routing" data-area="routing">Routing</a></li>
+            <li><a href="#/adapters" data-area="adapters">Adaptery</a></li>
+            <li class="mobile-hidden"><a href="#/configuration" data-area="configuration">Konfiguracja</a></li>
+            <li><a href="#/monitoring" data-area="monitoring">Monitoring</a></li>
+            <li><a href="#/diagnostics" data-area="diagnostics">Diagnostyka</a></li>
+            <li><a href="#/statistics" data-area="statistics">Statystyki</a></li>
+            <li><a href="#/logs" data-area="logs">Logi</a></li>
+            <li><a href="#/users" data-area="users">Użytkownicy i uprawnienia</a></li>
+        </ul>
+    </nav>
+    <main id="app-content" class="app-content">
+        <!-- Wypełniane przez router.js na podstawie bieżącego hasha -->
+    </main>
+</div>
+
+<script src="js/api.js"></script>
+<script src="js/router.js"></script>
+<script src="js/views/dashboard.js"></script>
+<script src="js/views/monitoring.js"></script>
+<script src="js/views/diagnostics.js"></script>
+<script src="js/views/logs.js"></script>
+<script src="js/views/statistics.js"></script>
+<script src="js/views/messages.js"></script>
+<script src="js/views/routing.js"></script>
+<script src="js/views/adapters.js"></script>
+<script src="js/views/configuration.js"></script>
+<script src="js/views/users.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

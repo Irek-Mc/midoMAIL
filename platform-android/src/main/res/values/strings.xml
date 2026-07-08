@@ -1,0 +1,41 @@
+<resources>
+    <string name="app_name">midoMAIL</string>
+
+    <!-- Ekran statusu i konfiguracji (ADR-0038-Ekran-Statusu-i-Konfiguracji-Android.md) -->
+    <string name="status_service_running">Usługa: ● Działa</string>
+    <string name="status_service_stopped">Usługa: ● Zatrzymana</string>
+    <string name="status_default_sms_yes">Domyślna aplikacja SMS: Tak</string>
+    <string name="status_default_sms_no">Domyślna aplikacja SMS: Nie</string>
+
+    <string name="label_adapters_section">Adaptery</string>
+    <string name="adapter_status_format">%1$s — %2$s — wysłane: %3$d, odebrane: %4$d</string>
+    <string name="adapter_healthy">zdrowy</string>
+    <string name="adapter_unhealthy">niezdrowy</string>
+    <string name="no_adapters_registered">Brak zarejestrowanych adapterów</string>
+
+    <string name="label_email_form_section">Konfiguracja e-mail</string>
+
+    <string name="description_smtp_host_port">Serwer wysyłkowy (SMTP) — dla Gmaila zostaw domyślne wartości</string>
+    <string name="hint_smtp_host">Host SMTP (np. smtp.gmail.com)</string>
+    <string name="hint_smtp_port">Port SMTP (domyślnie 587)</string>
+
+    <string name="description_imap_host_port">Serwer odbiorczy (IMAP) — dla Gmaila zostaw domyślne wartości</string>
+    <string name="hint_imap_host">Host IMAP (np. imap.gmail.com)</string>
+    <string name="hint_imap_port">Port IMAP (domyślnie 993)</string>
+
+    <string name="description_username">Adres e-mail, z którego bramka wysyła i na którym nasłuchuje odpowiedzi (np. Twoje konto Gmail utworzone dla tej aplikacji)</string>
+    <string name="hint_username">Adres e-mail bramki</string>
+
+    <string name="description_password">Hasło do powyższego konta. Dla Gmaila: hasło aplikacji (App Password), nie zwykłe hasło do konta</string>
+    <string name="hint_password">Hasło (App Password dla Gmaila)</string>
+
+    <string name="description_forward_to">Docelowy adres e-mail, na który mają trafiać przekazane SMS-y/MMS-y — Twoja prywatna skrzynka, w której chcesz je czytać</string>
+    <string name="hint_forward_to">Adres e-mail do odbioru SMS-ów</string>
+
+    <string name="description_webhook_url">Opcjonalnie: adres URL do powiadomień o awariach/alertach (np. webhook Slacka lub podobnej usługi). Zostaw puste, jeśli nie używasz</string>
+    <string name="hint_webhook_url">URL webhooka powiadomień (opcjonalny)</string>
+
+    <string name="button_save_and_restart">Zapisz i uruchom ponownie</string>
+    <string name="validation_error_required_fields">Login, hasło i adres przekierowania są wymagane</string>
+    <string name="save_success">Zapisano. Usługa uruchamia się ponownie…</string>
+</resources>

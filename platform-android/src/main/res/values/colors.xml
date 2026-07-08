@@ -1,0 +1,5 @@
+<resources>
+    <!-- Branding midoMAIL (midoMAIL-branding/README.txt) - kolor tła pod adaptive icon,
+         dopasowany do niebieskiego z logo. -->
+    <color name="ic_launcher_background">#1565C0</color>
+</resources>

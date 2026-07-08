@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC" />
+    <!-- Wymagane przez EmailAdapter (SMTP/IMAP, Iteracja 3.13) - bez tego każde połączenie
+         sieciowe kończy się SocketException: EACCES (Permission denied). -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <!-- Rola domyślnej aplikacji SMS/MMS - warunek wstępny Fazy 3, nie odroczony (ADR-0003).
+         WRITE_SMS celowo pominięty - nie jest publicznie deklarowalnym uprawnieniem w bieżącym
+         SDK (dostęp do zapisu w SMS Provider wynika z samej roli domyślnej aplikacji SMS). -->
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.RECEIVE_MMS" />
+    <uses-permission android:name="android.permission.RECEIVE_WAP_PUSH" />
+
+    <!-- Telefonia nie jest twardo wymagana do instalacji (np. urządzenia bez modemu) - Adapter GSM
+         po prostu zgłasza Degraded/brak zasięgu, gdy telefonii brak (21-Adapter-GSM.md, §9). -->
+    <uses-feature android:name="android.hardware.telephony" android:required="false" />
+
+    <application
+        android:label="@string/app_name"
+        android:icon="@mipmap/ic_launcher"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:allowBackup="false">
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <service
+            android:name=".GatewayForegroundService"
+            android:exported="false"
+            android:foregroundServiceType="dataSync" />
+
+        <!-- Komponenty wymagane przez system dla roli domyślnej aplikacji SMS/MMS
+             (40-Platforms/40-Android.md, §6; ADR-0003-Domyslna-aplikacja-SMS-MMS.md) - minimalne,
+             puste implementacje na tę iterację; logika biznesowa dochodzi w Iteracjach 3.8/3.10. -->
+
+        <receiver
+            android:name=".SmsDeliverReceiver"
+            android:permission="android.permission.BROADCAST_SMS"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.provider.Telephony.SMS_DELIVER" />
+            </intent-filter>
+        </receiver>
+
+        <receiver
+            android:name=".MmsWapPushReceiver"
+            android:permission="android.permission.BROADCAST_WAP_PUSH"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.provider.Telephony.WAP_PUSH_DELIVER" />
+                <data android:mimeType="application/vnd.wap.mms-message" />
+            </intent-filter>
+        </receiver>
+
+        <activity
+            android:name=".ComposeSmsActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.SENDTO" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="sms" />
+                <data android:scheme="smsto" />
+                <data android:scheme="mms" />
+                <data android:scheme="mmsto" />
+            </intent-filter>
+        </activity>
+
+        <service
+            android:name=".HeadlessSmsSendService"
+            android:permission="android.permission.SEND_RESPOND_VIA_MESSAGE"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.RESPOND_VIA_MESSAGE" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="sms" />
+                <data android:scheme="smsto" />
+                <data android:scheme="mms" />
+                <data android:scheme="mmsto" />
+            </intent-filter>
+        </service>
+
+        <!-- Udostępnia zapisywalny content:// Uri dla SmsManager.downloadMultimediaMessage
+             (Iteracja 3.10) - system zapisuje pobraną treść MMS pod tym Uri. -->
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="midomail.platform.android.mmsfileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/mms_file_provider_paths" />
+        </provider>
+
+        <!-- WYŁĄCZNIE do ręcznej weryfikacji produkcyjnej (Iteracja 3.13) - wprowadzenie hasła
+             aplikacji Gmail do Android Keystore bez trwałego UI. exported="true" wymagane - system
+             odrzuca broadcast nawet z adb shell do odbiornika exported="false" (potwierdzone
+             empirycznie: "Permission Denial... not exported"). Świadomy, udokumentowany kompromis
+             bezpieczeństwa: dowolna aplikacja na TYM URZĄDZENIU TESTOWYM mogłaby teoretycznie
+             nadpisać wpis w Keystore (write, nie read - żaden sekret nie wycieka na zewnątrz) -
+             akceptowalne dla narzędzia wyłącznie do ręcznej weryfikacji, nigdy niedystrybuowanego. -->
+        <receiver
+            android:name=".DebugCredentialProvisioningReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="midomail.platform.android.PROVISION_CREDENTIAL" />
+            </intent-filter>
+        </receiver>
+
+    </application>
+
+</manifest>
