@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="midoMAIL-branding/logo/logo_transparent_256.png" width="128" alt="midoMAIL logo">
+</p>
+
 # midoMAIL 2.0
 
 **Communication Gateway** — autonomiczny silnik komunikacyjny do bezpiecznego,
@@ -54,6 +58,28 @@ bez Androida.
 Domyślne porty: `8080` (Admin REST API), `8081` (UI). Przy pierwszym
 uruchomieniu proces tworzy lokalną konfigurację i sekrety oraz wypisuje w
 konsoli losowy klucz Admin API.
+
+## Aplikacja Android
+
+⚠️ **To nie jest zwykła aplikacja SMS do codziennego użytku.** midoMAIL na
+Androidzie to komponent bramy komunikacyjnej — po instalacji **przejmuje rolę
+domyślnej aplikacji SMS/MMS i zastępuje standardową appkę Wiadomości**
+systemu (wymóg platformy, nie opcja — bez tej roli Android nie gwarantuje
+odbioru MMS). Nie ma tradycyjnego interfejsu konwersacji jak w typowym
+komunikatorze — komunikaty widać przez panel administracyjny (`:ui-web`) albo
+REST/CLI Gateway'a. Z tego powodu lepiej sprawdza się na dedykowanym/zapasowym
+telefonie z aktywną kartą SIM niż na głównym telefonie do codziennej obsługi
+wiadomości.
+
+**Wymagania:**
+- Android 9.0 (API 28) lub nowszy (`minSdk 28`)
+- Aktywna karta SIM z zasięgiem (SMS/MMS wymagają realnej sieci komórkowej)
+- Zgoda na rolę domyślnej aplikacji SMS/MMS przy pierwszym uruchomieniu
+
+**Testowane na:** Xiaomi Redmi Note 4 (codename `mido`), Android 9. Inne
+urządzenia/wersje Androida powinny działać zgodnie ze specyfikacją, ale nie
+były jeszcze realnie zweryfikowane — informacje o zgodności (lub jej braku)
+mile widziane przez Issues.
 
 ## Wesprzyj projekt
 

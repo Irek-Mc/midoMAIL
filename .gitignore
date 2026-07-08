@@ -11,3 +11,7 @@ platform-jvm/config.properties
 # Klucz podpisywania Android generowany lokalnie przez release.sh (KEYSTORE.md) - nigdy nie
 # commitowany; każdy build ma własny, unikalny klucz.
 keys/
+
+# Metadane ostatniego lokalnego builda (release.sh) - efemeryczne, numer builda żyje w
+# build/build.counter (już zignorowanym przez build/ powyżej).
+version.txt
