@@ -15,6 +15,14 @@ Masz stary telefon z kartą SIM, który leży w szufladzie? Zainstaluj na nim
 midoMAIL, a zamienia się on w automatyczną "bramkę" między SMS-ami a Twoją
 skrzynką e-mail:
 
+```mermaid
+graph TD
+    A["📩 SMS przychodzi<br/>od nadawcy"] --> B["📱 Telefon Android<br/>z midoMAIL"]
+    B --> C["📧 Trafia do Twojej<br/>skrzynki e-mail"]
+    C --> D["✍️ Odpowiadasz<br/>na tego maila"]
+    D --> E["📩 Odpowiedź wraca<br/>jako SMS do nadawcy"]
+```
+
 1. Ktoś wysyła SMS na numer w tym telefonie.
 2. Wiadomość **nie zostaje na telefonie** — leci prosto na Twoją skrzynkę
    e-mail, na dowolne urządzenie, gdzie akurat jesteś.
