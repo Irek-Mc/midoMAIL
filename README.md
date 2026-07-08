@@ -17,8 +17,8 @@ skrzynką e-mail:
 
 ```mermaid
 graph TD
-    A["📩 SMS przychodzi<br/>od nadawcy"] --> B["📱 Telefon Android<br/>z midoMAIL"]
-    B --> C["📧 Trafia do Twojej<br/>skrzynki e-mail"]
+    A["📩 SMS<br/>od nadawcy"] --> B["📱 Telefon Android<br/>z midoMAIL"]
+    B --> C["📧 SMS trafia do Twojej<br/>skrzynki e-mail"]
     C --> D["✍️ Odpowiadasz<br/>na tego maila"]
     D --> E["📩 Odpowiedź wraca<br/>jako SMS do nadawcy"]
 ```
